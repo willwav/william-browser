@@ -47,7 +47,7 @@ const installer = function () {
 
   installer.setApp(app);
   installer.setTargetFolder(process.env.HOME + '/Applications');
-  installer.install();
+  installer.createGUI();
 
   return browser;
 };
