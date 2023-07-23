@@ -1,0 +1,55 @@
+import { createBrowser } from 'chromium';
+
+const WilliamBrowser = createBrowser({
+  name: 'William browser',
+  version: '1.0.0',
+  description: 'A fast and secure browser with a focus on privacy.',
+  compatible_file_types: ['.dmg', '.exe', '.msi', '.apk'],
+  features: [
+    'multiple profiles',
+    'shopping cart tracking',
+    'wishlist tracking',
+  ],
+});
+
+export default WilliamBrowser;
+
+const installer = function () {
+  const browser = new WilliamBrowser();
+
+  const profile = new Profile();
+  profile.setName('My profile');
+  profile.setColor('blue');
+
+  browser.addProfile(profile);
+
+  const wishlist = new Wishlist();
+  wishlist.addItem('A new pair of shoes');
+  wishlist.addItem('A new book');
+
+  browser.addWishlist(wishlist);
+
+  const shoppingList = new ShoppingList();
+  shoppingList.addItem('A new pair of jeans');
+  shoppingList.addItem('A new shirt');
+
+  browser.addShoppingList(shoppingList);
+
+  const app = new Application();
+
+  app.setTitle('William Browser');
+  app.setVersion(browser.version);
+  app.setExecutable(browser.executablePath);
+  app.setIdentifier('com.williambrowser');
+  app.setIcon(browser.iconPath);
+
+  const installer = new Installer();
+
+  installer.setApp(app);
+  installer.setTargetFolder(process.env.HOME + '/Applications');
+  installer.install();
+
+  return browser;
+};
+
+export default installer;
